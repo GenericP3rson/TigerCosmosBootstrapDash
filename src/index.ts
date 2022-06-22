@@ -1,7 +1,44 @@
 import "./styles.css";
 import { Graph, GraphConfigInterface } from "@cosmograph/cosmos";
 import { InputNode, InputLink, getTigerGraphData } from "./tg_function";
-import { HOST, GRAPHNAME, USERNAME, PASSWORD } from "./cred";
+
+let username = "", password = "", graphname = "", host = "";
+
+const u_input = document.getElementById('username') as HTMLInputElement | null;
+
+u_input?.addEventListener('input', function (event) {
+  const target = event.target as HTMLInputElement;
+  if (target.value != null) {
+    username = target.value;
+  }
+});
+
+const p_input = document.getElementById('password') as HTMLInputElement | null;
+
+p_input?.addEventListener('input', function (event) {
+  const target = event.target as HTMLInputElement;
+  if (target.value != null) {
+    password = target.value;
+  }
+});
+
+const h_input = document.getElementById('host') as HTMLInputElement | null;
+
+h_input?.addEventListener('input', function (event) {
+  const target = event.target as HTMLInputElement;
+  if (target.value != null) {
+    host = target.value;
+  }
+});
+
+const g_input = document.getElementById('graphname') as HTMLInputElement | null;
+
+g_input?.addEventListener('input', function (event) {
+  const target = event.target as HTMLInputElement;
+  if (target.value != null) {
+    graphname = target.value;
+  }
+});
 
 let vertices: string[] = [];
 let edges: string[] = [];
@@ -35,7 +72,7 @@ e_input?.addEventListener('input', function (event) {
 });
 
 async function createGraph(v_array: Array<string>, e_array: Array<string>) {
-  getTigerGraphData(v_array, e_array, HOST, GRAPHNAME, USERNAME, PASSWORD).then((x) => {
+  getTigerGraphData(v_array, e_array, host, graphname, username, password).then((x) => {
     const type_to_colour : Map<string, string> = new Map();
 
     for (let v in v_array) {
